@@ -2,7 +2,7 @@ class Genre
 	attr_accessor :name, :songs
 	
 	@@genres =[]
-	def initialize
+	def initialize name
 		@name
 		@songs = []
 		@@genres << self
@@ -21,4 +21,9 @@ class Genre
 	def	self.all
 		@@genres
 	end
+
+	def self.search_all(genre)
+    	@@genres.detect { |defined_genre| defined_genre.name == genre }
+  	end
+
 end

@@ -73,7 +73,7 @@ Woodchuck::WOODCHUCKS.each do |wood_count|
 	 #chucked_wood += Woodchuck.woodchuck_count #wood_count.chuck_count
 end
 
-puts "The number of wood chucked byt them are " + chucked_wood.to_s
+puts "The number of wood chucked by them are " + chucked_wood.to_s
 
 #puts Woodchuck.woodchuck_count
 
