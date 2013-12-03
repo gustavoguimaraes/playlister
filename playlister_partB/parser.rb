@@ -48,18 +48,18 @@ end
 
 
 
-      song = Song.new(m_song)
-      song.genre = Genre.search_all(m_genre) || Genre.new(m_genre)
+#       song = Song.new(m_song)
+#       song.genre = Genre.search_all(m_genre) || Genre.new(m_genre)
 
-      artist.add_song(song)
+#       artist.add_song(song)
 
-      unless existing_artist
-        artists << artist
-      end
-    end
-  end
+#       unless existing_artist
+#         artists << artist
+#       end
+#     end
+#   end
 
-end
+# end
 
 
 # my_parser = Parser.new
