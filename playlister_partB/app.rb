@@ -1,46 +1,112 @@
+#this is the app
 require './parser'
 
-#Shamelessly copied this from Oliver's app.rb in order to get an idea. It only lists the artists' name. Did not have the time to finish my app. 
+def browsing
+  puts "Browse by artist or genre"
+  browse_choice = gets.chomp.downcase
+  parser = Parser.new
 
-class App
+  catalog = parser.parse_songs
 
-  attr_accessor :my_parser
+  if browse_choice == "artist"
+    artist_catalog = []
+    artist_songs = {}
+    catalog.each do |file|
+      artist_catalog << file[0]
+       
+         if artist_songs[file[0]].nil?
+          artist_songs[file[0]] = 1 
+         else
+          artist_songs[file[0]] += 1
+         end
 
-  def initialize
-    @my_parser = Parser.new('./data')
-  end
+    end
+    
+    artist_catalog.uniq!.sort
+    
+    artist_songs.each do |artist, count|
+      if count == 1
+        puts "#{artist} - #{count} song"
+      else
+        puts "#{artist} - #{count} songs"
+      end
+    end
 
-  def greeting
-    puts "+" * 50
-    puts "Welcome to Playlister, a CLI application to convert a directory into a playlist!"
-    puts "+" * 50
-  end
+    #puts artist_catalog
+    
+    puts "There are #{artist_catalog.count} artists in this list"
 
 
+###################################
+    puts "Select an artist"
+    which_artist = gets.chomp
+    artist_genre = {}
 
-  def AorG_prompt
-    puts "Browse by Artist or Genre (type 'artist' or 'genre')"
-    inp = gets.chomp
-    while inp != "artist" || "genre"
-      puts "Please type either 'artist' or 'genre'"
-      inp = gets.chomp
-     end
-    return inp
-  end
+    temp = []
+    catalog.collect do |file|
+      
+      if file[0] == which_artist
+        temp <<file[0]
 
-  def ListArtists
-    artists = my_parser.artists.collect {|artist| artist.name}.sort
-    return artists.each_with_index {|artist, i| puts "#{i+1}: #{artist}"}
-  end
+        artist_genre[file[1]] = file[2]
+      end
+      
+    end
+#define a method to print Artist - 2 songs#######
+    if temp.size == 1
+      puts which_artist + " - #{temp.size} song"
+    else
+      puts which_artist + " - #{temp.size} songs"
+    end
+##########################################
+    num = 1
+    artist_genre.each do |song, genre|
+        puts "#{num}. #{song} - #{genre}"
+        num = num + 1
+    end
 
-  def ListGenres
-  end
 
-  def ListSongs artist
+  elsif browse_choice == "genre"
+    genre_catalog = []
+    catalog.each do |file|
+      genre_catalog << file[2]
+    end
+    
+    genre_catalog.uniq!.sort
+    
+    puts genre_catalog
+    
+    puts "There are #{genre_catalog.count} genres in this list"
+
+    puts "Select a genre"
+    which_genre = gets.chomp
+    genre_artist = []
+    genre_songs =[]
+    
+    catalog.each do |file|
+      if file[2] == which_genre
+        genre_artist<< file[0]
+        genre_songs << file[1]
+      end
+    end
+       
+       puts which_genre+ ": " +"#{genre_songs.size} Songs, #{genre_artist.size} Artist. Type \"artist\"  or \"songs\" to see all artists or songs from this genre"
+       response = gets.chomp
+
+       if response == "artist"
+        puts genre_artist
+       elsif response == "songs"
+        puts genre_songs
+       else
+        puts "make sure you type artist or songs"
+       end
+
+  else
+    puts "sorry, I don't understand your input"
   end
 
 
 end
 
- app = App.new
- app.ListArtists
+
+browsing

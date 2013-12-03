@@ -1,14 +1,6 @@
 class Song
 
 attr_accessor :genre, :artist
-
-
-	# def initialize
-	# 	@title = title
-	# 	@artist = []
-	# 	@genre
-	# end
-
 	
 	def genre=(genre)
 		@genre = genre
