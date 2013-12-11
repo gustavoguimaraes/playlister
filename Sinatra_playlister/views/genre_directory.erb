@@ -1,6 +1,9 @@
-<h3 style="padding: 20px 50px 0px 50px;">Genre Directory</h3>
-<ol>
+
+<div style="text-align: center">
+  <h1>Genre Directory</h1>
+<div>
   <% @my_genres.each_with_index do |genre, index| %><br><br>
-  <a href= "/genres/<%=index%>"><button class="my_button"><%="#{genre.name}" %> </button></a>
+  <a href= "/genres/<%=genre.name%>"><button class="my_button" style="width: 60%; font-size:45px;" ><%="#{genre.name}" %> </button></a>
     <% end %>
-</ol>
+</div>
+</div>

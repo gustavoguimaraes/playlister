@@ -13,6 +13,7 @@ module Playlister
       @my_directory = Parser.new.make_directory("data")
       @my_artists = Artist.all 
       @my_genres = Genre.all
+      @requested_artist
     end
 
     get '/' do
@@ -24,30 +25,14 @@ module Playlister
       erb :artist_directory
     end
 
-    get '/directory/:name' do
+    get '/artists/:name' do
       request = params[:name]
-      
-      if (@my_artists.each do |artist|
+      @my_artists.each do |artist|
         if artist.slugged_name.downcase == request.downcase
           @requested_artist = artist
-          true
-        else
-          false
         end
-        end)
-          erb :artist_page
-      # elsif (@my_genres.each do |genre|
-      #     if genre.name.downcase == request.downcase
-      #       @requested_genre = genre
-      #       true
-      #     else
-      #       false
-      #     end
-      #   end)
-      #   erb :genre_page
-      else
-      erb :directory
-    end
+      end
+      erb :artist_page
     end
 
     get '/songs/:artist/:index' do
@@ -62,9 +47,13 @@ module Playlister
       erb :genre_directory
     end
 
-    get '/genres/:index' do
-      request = params[:index]
-      @requested_genre = @my_genres[request.to_i]
+    get '/genres/:name' do
+      request = params[:name]
+      @my_genres.each do |genre|
+        if genre.name.downcase == request.downcase
+        @requested_genre = genre
+        end
+      end
       erb :genre_page
     end
 
