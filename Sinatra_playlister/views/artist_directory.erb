@@ -1,6 +1,8 @@
 
- <ol>
+<div style="text-align: center">
+ <div>
   <% @my_artists.each_with_index do |artist, index| %>
-    <a href= "/artists/<%=index%>"><button><%="#{index +1}. #{artist.name}" %> </button></a>
+    <a href= "/artists/<%=artist.slugged_name%>"><button class= "my_button" style="width: 60%; font-size:45px;"><%="#{index +1}. #{artist.name}" %> </button></a>
   <% end %>
-</ol>
+</div>
+</div>

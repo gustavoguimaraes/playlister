@@ -1,6 +1,6 @@
 class Artist
 
-attr_accessor :name, :songs
+attr_accessor :name, :songs, :slugged_name
 
 @@artist_array = []
 
@@ -9,7 +9,14 @@ attr_accessor :name, :songs
        @name
        @songs = []
        @@artist_array << self
+       @slugged_name
     end
+
+    def slugged_name
+      @slugged_name = name.gsub(" ", "_")
+
+    end
+
 
     def self.count
         @@artist_array.length

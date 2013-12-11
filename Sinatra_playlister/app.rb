@@ -24,10 +24,30 @@ module Playlister
       erb :artist_directory
     end
 
-    get '/artists/:index' do
-      request = params[:index]
-      @requested_artist = @my_artists[request.to_i]
-      erb :artist_page
+    get '/directory/:name' do
+      request = params[:name]
+      
+      if (@my_artists.each do |artist|
+        if artist.slugged_name.downcase == request.downcase
+          @requested_artist = artist
+          true
+        else
+          false
+        end
+        end)
+          erb :artist_page
+      # elsif (@my_genres.each do |genre|
+      #     if genre.name.downcase == request.downcase
+      #       @requested_genre = genre
+      #       true
+      #     else
+      #       false
+      #     end
+      #   end)
+      #   erb :genre_page
+      else
+      erb :directory
+    end
     end
 
     get '/songs/:artist/:index' do

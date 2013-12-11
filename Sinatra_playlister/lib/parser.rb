@@ -13,6 +13,7 @@ def make_directory(path)
 
     temp_song = Song.new
     temp_song.title = song_title
+    temp_song.slugged_name
 
     preexisting_genre = Genre.all.detect {|item| item.name == genre}
   if preexisting_genre
@@ -30,6 +31,7 @@ def make_directory(path)
     temp_artist = Artist.new
     temp_artist.name = artist_name
     temp_artist.add_song(temp_song)
+    temp_artist.slugged_name
   end
 
   my_directory
