@@ -1,0 +1,5 @@
+<ol>
+  <% @my_genres.each_with_index do |genre, index| %>
+  <a href= "/genres/<%=index%>"><button><%="#{genre.name}" %> </button></a>
+    <% end %>
+</ol>

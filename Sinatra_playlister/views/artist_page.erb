@@ -1,0 +1,10 @@
+<h1>Welcome to the page for <%= @requested_artist.name%></h1>
+<ul><h2><%= @requested_artist.name%> has performed:</h2></ul>
+
+<ol>
+    <% @requested_artist.songs.each_with_index do |song, index| %>
+    <h2><%= "#{index + 1}- #{song.title};" %></h2>
+  <% end %>
+<ol>
+
+<h4>Back to the <a href="/"><button>directory!</button></a></h4>

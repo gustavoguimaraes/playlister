@@ -1,0 +1,12 @@
+
+<h1>Welcome to the <%= @requested_genre.name %> page!</h1> 
+<ul><h2><%= @requested_genre.name%> has these songs:</h2></ul>
+
+  <ol>
+    <% @requested_genre.songs.each_with_index do |song, index| %>
+    <h2><%= "#{index + 1}- #{song.title};" %></h2>
+  <% end %>
+<ol>
+
+
+<h4>Back to the <a href="/"><button>directory!</button></a></h4>
